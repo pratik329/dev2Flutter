@@ -58,31 +58,32 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: ListView.builder(
-          itemCount: Categories.length,
-          itemBuilder: (context, i) => Column(
-            children: <Widget>[
-              Text(Categories[i]),
-              Container(
-                height: 150.0,
-                child: ListView.builder(
-                  padding: EdgeInsets.all(10.0),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: Products[i].length,
-                  itemBuilder: (context, j) => Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Text(
-                          Products[i][j],
-                          style: Theme.of(context).textTheme.display1,
-                        ),
-                      ),
-                    ),
+          itemCount: 20,
+          itemBuilder: (context, i) => Dismissible(
+            background: Container(
+              color: Colors.red,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    Icons.clear,
+                    color: Colors.white,
                   ),
-                ),
-              )
-            ],
+                  Icon(
+                    Icons.clear,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+            ),
+            key: UniqueKey(),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage:
+                    NetworkImage("https://pragprag.com/favicon.png"),
+              ),
+              title: Text("Example ${i + 1}"),
+            ),
           ),
         ) // This trailing comma makes auto-formatting nicer for build methods.
         );
