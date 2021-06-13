@@ -43,12 +43,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    const Categories = ["Automotive", "Books", "Electronics", "Food"];
-    const Products = [
-      ["Car", "Type", "Fuel", "Oil"],
-      ["Programing Book", "Novel", "Pilitics Bookk", "Bussiness Book"],
-      ["Desktop Computer", "Laptop", "Computer", "Keybord"],
-      ["Pasta", "Pizza", "Bread", "Cheese", "Ham"]
+    List<Post> posts = [
+      Post(
+        postText: "This is a short Post",
+        profileName: "Short Post",
+        // profilePicture: NetworkImage("")
+      ),
+      Post(
+        postText: "This is a Medium Post",
+        profileName: "Medium Post",
+        // profilePicture: NetworkImage("")
+      )
     ];
 
     return Scaffold(
@@ -58,34 +63,72 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: ListView.builder(
-          itemCount: 20,
-          itemBuilder: (context, i) => Dismissible(
-            background: Container(
-              color: Colors.red,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(
-                    Icons.clear,
-                    color: Colors.white,
+          itemCount: 2,
+          itemBuilder: (context, i) => Card(
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    CircleAvatar(
+                        // backgroundImage: posts[i].profilePicture,
+                        ),
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text(
+                        posts[i].profileName,
+                        style: Theme.of(context).textTheme.subhead,
+                      ),
+                    )
+                  ],
+                ),
+                Align(
+                  alignment: FractionalOffset.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Text(
+                      posts[i].postText,
+                      style: Theme.of(context).textTheme.body1,
+                    ),
                   ),
-                  Icon(
-                    Icons.clear,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-            key: UniqueKey(),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage:
-                    NetworkImage("https://pragprag.com/favicon.png"),
-              ),
-              title: Text("Example ${i + 1}"),
+                ),
+                Divider(),
+                Row(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.thumb_up,
+                        color: Colors.redAccent,
+                      ),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.comment,
+                        color: Colors.greenAccent,
+                      ),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.share,
+                        color: Colors.blueAccent,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
+}
+
+class Post {
+  Post({required this.profileName, required this.postText});
+
+  // ImageProvider profilePicture;
+  String profileName;
+  String postText;
 }
