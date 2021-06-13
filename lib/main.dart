@@ -43,92 +43,38 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Post> posts = [
-      Post(
-        postText: "This is a short Post",
-        profileName: "Short Post",
-        // profilePicture: NetworkImage("")
-      ),
-      Post(
-        postText: "This is a Medium Post",
-        profileName: "Medium Post",
-        // profilePicture: NetworkImage("")
-      )
-    ];
-
     return Scaffold(
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Colors.blue[300],
         appBar: AppBar(
           backgroundColor: Colors.pinkAccent,
           title: Text(widget.title),
         ),
-        body: ListView.builder(
-          itemCount: 2,
-          itemBuilder: (context, i) => Card(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    CircleAvatar(
-                        // backgroundImage: posts[i].profilePicture,
-                        ),
-                    Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Text(
-                        posts[i].profileName,
-                        style: Theme.of(context).textTheme.subhead,
-                      ),
-                    )
-                  ],
-                ),
-                Align(
-                  alignment: FractionalOffset.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.all(5),
-                    child: Text(
-                      posts[i].postText,
-                      style: Theme.of(context).textTheme.body1,
-                    ),
-                  ),
-                ),
-                Divider(),
-                Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.thumb_up,
-                        color: Colors.redAccent,
-                      ),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.comment,
-                        color: Colors.greenAccent,
-                      ),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.share,
-                        color: Colors.blueAccent,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                )
-              ],
-            ),
+        body: GridView.builder(
+          padding: EdgeInsets.all(20.0),
+          itemCount: 15,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 50.0,
+              mainAxisSpacing: 100.0),
+          itemBuilder: (context, index) => Text(
+            "${index + 1}",
+            style: Theme.of(context).textTheme.display1,
           ),
-        ) // This trailing comma makes auto-formatting nicer for build methods.
+        )
+        // GridView.extent(
+        //   maxCrossAxisExtent: 50.0,
+        //   crossAxisSpacing: 50.0,
+        //   mainAxisSpacing: 100.0,
+        //   padding: EdgeInsets.all(20.0),
+        //   children: [1, 2, 3, 4, 5, 6, 7, 8, 9.10, 11, 12, 13, 14, 15]
+        //       .map(
+        //         (e) => Text(
+        //           "$e",
+        //           style: Theme.of(context).textTheme.display1,
+        //         ),
+        //       )
+        //       .toList(),
+        // ) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
-}
-
-class Post {
-  Post({required this.profileName, required this.postText});
-
-  // ImageProvider profilePicture;
-  String profileName;
-  String postText;
 }
