@@ -49,20 +49,65 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.pinkAccent,
           title: Text(widget.title),
         ),
-        body: GridView.builder(
-          padding: EdgeInsets.all(20.0), //padding with screen Border
-          itemCount: 15,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 50.0,
-              mainAxisSpacing: 100.0),
-          itemBuilder: (context, i) => Card(
-            color: Colors.blue,
-            child: Center(
-              child: Text("${i + 1}"),
+        body: ListView.builder(itemBuilder: (context, i) {
+          var n = 3231 - i - i * 23 * (i % 2) - 1;
+          return Card(
+            margin: EdgeInsets.all(10.0),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(""),
+                      ),
+                    ),
+                    Text(
+                      "A Bot ",
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    Text(
+                      " @human$n",
+                      style: Theme.of(context).textTheme.overline,
+                    )
+                  ],
+                ),
+                Padding(
+                  child: Text(
+                    "It no human," + "but act like human",
+                    style: Theme.of(context).textTheme.body1,
+                  ),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
+                ),
+                ButtonTheme(
+                  child: Row(
+                    children: <Widget>[
+                      FlatButton(
+                        child: Text("follow"),
+                        onPressed: () => Scaffold.of(context).showSnackBar(
+                            SnackBar(content: Text("Now follow @uman$n"))),
+                      ),
+                      FlatButton(
+                          child: Text("send"),
+                          onPressed: () => Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text("you cant to @human$n"))))
+                    ],
+                  ),
+                )
+              ],
             ),
-          ),
-        ) // This trailing comma makes auto-formatting nicer for build methods.
+          );
+        })
+        // Center(
+        //   child: Chip(
+        //     avatar: CircleAvatar(
+        //       backgroundImage: NetworkImage(""),
+        //     ),
+        //     label: Text("A Bot"),
+        //   ),
+        // ) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 }
